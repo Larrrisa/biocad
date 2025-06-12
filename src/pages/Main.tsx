@@ -3,6 +3,9 @@ import Input from "../components/Input";
 import CustomButton from "../components/Button";
 import { useState } from "react";
 import { Typography } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { alignmentSchema } from "../schemas/zod";
 
 const aminoAcidColorMap: Record<string, string> = {
   C: "#FFEA00",
@@ -28,21 +31,7 @@ const aminoAcidColorMap: Record<string, string> = {
 };
 
 function Main() {
-  const [firstInput, setFirstInput] = useState("");
-  const [secondInput, setSecondInput] = useState("");
   const [resultVisible, setResultVisible] = useState(false);
-
-  const handleFirstInputChange = (value: string) => {
-    setFirstInput(value);
-  };
-
-  const handleSecondInputChange = (value: string) => {
-    setSecondInput(value);
-  };
-
-  function handleClick() {
-    setResultVisible(true);
-  }
 
   function getAminoAcidColor(aminoAcid: string): string {
     const upperAminoAcid = aminoAcid.toUpperCase();
@@ -65,28 +54,59 @@ function Main() {
     return result;
   }
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(alignmentSchema),
+    mode: "onChange",
+    defaultValues: {
+      firstInput: "",
+      secondInput: "",
+    },
+  });
+
+  function onSubmit() {
+    setResultVisible(true);
+  }
+
+  const firstInput = watch("firstInput") || "";
+  const secondInput = watch("secondInput") || "";
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
       <h1 className="text-4xl font-bold mb-4">Выравнивание</h1>
 
-      <div>
-        <Input onChange={handleFirstInputChange} />
-        <Input onChange={handleSecondInputChange} />
-      </div>
-      <CustomButton label={"Сравнить"} onClick={handleClick} />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          name="firstInput"
+          label="Первая строка"
+          register={register}
+          error={errors.firstInput?.message}
+        />
+        <Input
+          name="secondInput"
+          label="Вторая строка"
+          register={register}
+          error={errors.secondInput?.message}
+        />
+        <CustomButton label={"Сравнить"} type="submit" />
+      </form>
 
       {resultVisible && (
         <div className="mt-4">
           <Typography variant="h3">Результат</Typography>
           <Typography variant="body1">
             Первая строка:
-            {firstInput.split("").map((aminoAcid, index) => (
+            {firstInput.split("").map((aminoAcid: string, index: number) => (
               <span
                 key={index}
                 style={{
                   backgroundColor: getAminoAcidColor(aminoAcid),
                   textAlign: "center",
-                  display: "inline-block",
+                  display: "inline",
                   minWidth: "20px",
                 }}
               >
@@ -106,7 +126,7 @@ function Main() {
                       ? getAminoAcidColor(item.letter)
                       : "",
                     textAlign: "center",
-                    display: "inline-block",
+                    display: "inline",
                     minWidth: "20px",
                   }}
                 >

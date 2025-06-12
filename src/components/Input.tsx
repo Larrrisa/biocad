@@ -1,29 +1,36 @@
 import TextField from "@mui/material/TextField";
+import { UseFormRegister } from "react-hook-form";
 
 interface InputProps {
   type?: string;
   placeholder?: string;
-  value?: string;
-  onChange?: (value: string) => void;
+  register: UseFormRegister<any>;
   className?: string;
+  label?: string;
+  name: string;
+  error?: string;
 }
 
 function Input({
   type = "text",
   placeholder = "",
-  value,
-  onChange,
+  register,
   className = "",
+  label = "",
+  name = "",
+  error = "",
 }: InputProps) {
   return (
     <TextField
       type={type}
       placeholder={placeholder}
-      value={value}
       className={className}
-      onChange={(e) => onChange?.(e.target.value)}
       variant="outlined"
       margin="normal"
+      label={label}
+      {...register(name)}
+      error={!!error}
+      helperText={error}
     />
   );
 }
