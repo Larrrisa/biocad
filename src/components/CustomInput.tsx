@@ -11,7 +11,7 @@ interface InputProps {
   error?: string;
 }
 
-function Input({
+function CustomInput({
   type = "text",
   placeholder = "",
   register,
@@ -34,4 +34,4 @@ function Input({
     />
   );
 }
-export default Input;
+export default CustomInput;
