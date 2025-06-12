@@ -6,6 +6,8 @@ import { Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { alignmentSchema } from "../schemas/zod";
+import { useCopyText } from "../hooks/useCopyText";
+import Snackbar from "@mui/material/Snackbar";
 
 const aminoAcidColorMap: Record<string, string> = {
   C: "#FFEA00",
@@ -32,6 +34,7 @@ const aminoAcidColorMap: Record<string, string> = {
 
 function Main() {
   const [resultVisible, setResultVisible] = useState(false);
+  const copied = useCopyText();
 
   function getAminoAcidColor(aminoAcid: string): string {
     const upperAminoAcid = aminoAcid.toUpperCase();
@@ -137,6 +140,11 @@ function Main() {
           </Typography>
         </div>
       )}
+      <Snackbar
+        open={copied}
+        message="Скопировано"
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      />
     </div>
   );
 }
