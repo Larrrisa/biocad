@@ -53,5 +53,5 @@ export default {
       template: "./public/index.html",
     }),
   ],
-  mode: "development",
+  mode: "production",
 };
