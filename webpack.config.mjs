@@ -11,7 +11,7 @@ export default {
     path: path.resolve(__dirname, "build"),
     filename: "bundle.[contenthash].js",
     clean: true,
-    publicPath: "/biocad-test-task/",
+    publicPath: "/biocad/",
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
