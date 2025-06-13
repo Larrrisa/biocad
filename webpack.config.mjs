@@ -1,12 +1,17 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+import path from "path";
+import { fileURLToPath } from "url";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "build"),
     filename: "bundle.[contenthash].js",
     clean: true,
+    publicPath: "/biocad-test-task/",
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
@@ -25,7 +30,20 @@ module.exports = {
         use: "ts-loader",
       },
       {
+        test: /\.module\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+            },
+          },
+        ],
+      },
+      {
         test: /\.css$/,
+        exclude: /\.module\.css$/,
         use: ["style-loader", "css-loader"],
       },
     ],

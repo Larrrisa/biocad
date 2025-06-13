@@ -11,7 +11,6 @@ export default tseslint.config({
     js.configs.recommended,
     ...tseslint.configs.recommended,
     eslintPluginPrettierRecommended,
-    ...pluginQuery.configs["flat/recommended"],
   ],
   files: ["**/*.{ts,tsx}"],
   ignores: ["dist"],

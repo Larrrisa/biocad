@@ -1,10 +1,12 @@
-
 export type CompareResult = {
   letter: string;
   match: boolean;
 }[];
 
-function compareAminoAcids(firstInput: string, secondInput: string): CompareResult {
+function compareAminoAcids(
+  firstInput: string,
+  secondInput: string,
+): CompareResult {
   const firstString = firstInput.split("");
   const secondString = secondInput.split("");
   const result: CompareResult = [];
@@ -17,4 +19,3 @@ function compareAminoAcids(firstInput: string, secondInput: string): CompareResu
 }
 
 export default compareAminoAcids;
-
