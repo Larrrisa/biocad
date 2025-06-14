@@ -1,5 +1,6 @@
 import { UseFormRegister } from "react-hook-form";
 import TextField from "@mui/material/TextField";
+
 import "../styles/global.css";
 
 interface InputProps {
@@ -20,39 +21,16 @@ function CustomInput({
   error = "",
 }: InputProps) {
   return (
-    <>
-      <TextField
-        type={type}
-        placeholder={placeholder}
-        variant="outlined"
-        margin="normal"
-        label={label}
-        {...register(name)}
-        error={!!error}
-        helperText={error}
-        sx={{
-          "& .MuiOutlinedInput-root": {
-            "& fieldset": {
-              borderColor: "#e0e0e0",
-            },
-            "&:hover fieldset": {
-              borderColor: "#1976d2",
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: "#1976d2",
-            },
-          },
-          "& .MuiInputLabel-root": {
-            color: "#666",
-            "&.Mui-focused": {
-              color: "#1976d2",
-            },
-          },
-          marginBottom: 2,
-          width: "100%",
-        }}
-      />
-    </>
+    <TextField
+      type={type}
+      placeholder={placeholder}
+      variant="outlined"
+      margin="normal"
+      label={label}
+      {...register(name)}
+      error={!!error}
+      helperText={error}
+    />
   );
 }
 export default CustomInput;

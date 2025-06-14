@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import compareAminoAcids from "../utils/compareAminoAcids";
 
@@ -64,7 +64,7 @@ function AlignmentResult({ first, second, getColor }: Props) {
                     <span
                       key={absoluteIndex}
                       style={{
-                        backgroundColor: getColor(aminoAcid),
+                        backgroundColor: getColor(aminoAcid)
                       }}
                     >
                       {aminoAcid}
@@ -84,7 +84,7 @@ function AlignmentResult({ first, second, getColor }: Props) {
                     <span
                       key={absoluteIndex}
                       style={{
-                        backgroundColor: isMismatch ? getColor(letter) : "",
+                        backgroundColor: isMismatch ? getColor(letter) : ""
                       }}
                     >
                       {letter}

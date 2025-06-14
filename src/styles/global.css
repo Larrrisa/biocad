@@ -12,13 +12,13 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  max-width: 1000px;
 }
 .container .form {
   width: 100%;
 }
 
-.form button {
+.form button,
+.form div {
   width: 100%;
 }
 .buttons {

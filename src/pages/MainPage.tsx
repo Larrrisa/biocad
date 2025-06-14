@@ -25,7 +25,7 @@ function Main() {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(alignmentSchema),
-    mode: "onChange",
+    mode: "onSubmit",
     defaultValues: {
       firstInput: "",
       secondInput: "",
