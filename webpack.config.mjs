@@ -53,6 +53,7 @@ export default (env, argv) => {
     plugins: [
       new HtmlWebpackPlugin({
         template: "./public/index.html",
+        favicon: "./public/favicon.png",
       }),
     ],
     mode: isProd ? "production" : "development",
